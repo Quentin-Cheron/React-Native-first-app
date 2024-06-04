@@ -14,16 +14,19 @@ export default function GoodActionScreen() {
   const [goodActionsList, setGoodActionsList] = useState([]);
 
   const handleAddGoodAction = () => {
-    setGoodActionsList([
-      ...goodActionsList,
-      { key: goodActionsList.length, value: goodAction },
-    ]);
+    if (goodActionsList.findIndex((item) => item.value === goodAction) === -1) {
+      setGoodActionsList([
+        ...goodActionsList,
+        { key: Math.random(), value: goodAction },
+      ]);
+    } else {
+      alert("This action already exists");
+    }
     setGoodAction("");
   };
 
   const handleDeleteGoodAction = (e) => {
-    const newList = goodActionsList.filter((item) => item.key !== e);
-    setGoodActionsList(newList);
+    setGoodActionsList(goodActionsList.filter((item) => item.value !== e));
   };
 
   return (
@@ -45,7 +48,7 @@ export default function GoodActionScreen() {
               <Text>{itemData.item.value}</Text>
               <Button
                 title="Supprimer"
-                onPress={() => handleDeleteGoodAction(itemData.item.key)}
+                onPress={() => handleDeleteGoodAction(itemData.item.value)}
               />
             </View>
           )}
