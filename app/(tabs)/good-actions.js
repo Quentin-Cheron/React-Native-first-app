@@ -6,6 +6,7 @@ import {
   Button,
   FlatList,
   StyleSheet,
+  ScrollView,
 } from "react-native";
 
 export default function GoodActionScreen() {
@@ -13,33 +14,32 @@ export default function GoodActionScreen() {
   const [goodActionsList, setGoodActionsList] = useState([]);
 
   const handleAddGoodAction = () => {
-    setGoodActionsList([
-      ...goodActionsList,
-      { key: Math.random().toString(), value: goodAction },
-    ]);
+    setGoodActionsList([...goodActionsList, goodAction]);
     setGoodAction("");
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Enter good action"
-          style={styles.input}
-          onChangeText={setGoodAction}
-          value={goodAction}
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Enter good action"
+            style={styles.input}
+            onChangeText={setGoodAction}
+            value={goodAction}
+          />
+          <Button color="#C36878" title="Add" onPress={handleAddGoodAction} />
+        </View>
+        <FlatList
+          data={goodActionsList}
+          renderItem={(itemData) => (
+            <View style={styles.listItem}>
+              <Text>{itemData.item}</Text>
+            </View>
+          )}
         />
-        <Button color="#C36878" title="Add" onPress={handleAddGoodAction} />
       </View>
-      <FlatList
-        data={goodActionsList}
-        renderItem={(itemData) => (
-          <View style={styles.listItem}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
-      />
-    </View>
+    </ScrollView>
   );
 }
 
