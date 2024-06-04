@@ -14,15 +14,21 @@ export default function GoodActionScreen() {
   const [goodActionsList, setGoodActionsList] = useState([]);
 
   const handleAddGoodAction = () => {
-    setGoodActionsList([...goodActionsList, goodAction]);
+    setGoodActionsList([
+      ...goodActionsList,
+      { key: goodActionsList.length, value: goodAction },
+    ]);
     setGoodAction("");
   };
 
-  const handleDeleteGoodAction = (e) => {};
+  const handleDeleteGoodAction = (e) => {
+    const newList = goodActionsList.filter((item) => item.key !== e);
+    setGoodActionsList(newList);
+  };
 
   return (
     <ScrollView>
-      <View style={styles.container}>
+      <View style={styles.group}>
         <View style={styles.inputContainer}>
           <TextInput
             placeholder="Enter good action"
@@ -36,10 +42,11 @@ export default function GoodActionScreen() {
           data={goodActionsList}
           renderItem={(itemData) => (
             <View style={styles.listItem}>
-              <Text>{itemData.item}</Text>
-              <Buttton onPress={(e) => handleDeleteGoodAction(e)}>
-                Supprimer
-              </Buttton>
+              <Text>{itemData.item.value}</Text>
+              <Button
+                title="Supprimer"
+                onPress={() => handleDeleteGoodAction(itemData.item.key)}
+              />
             </View>
           )}
         />
@@ -49,11 +56,9 @@ export default function GoodActionScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+  group: {
+    width: "80%",
+    margin: "auto",
   },
   inputContainer: {
     flexDirection: "row",
@@ -69,13 +74,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     padding: 10,
-    marginVertical: 10,
     backgroundColor: "#ccc",
-  },
-  button: {
-    backgroundColor: "red",
-    color: "#fff",
-    display: "flex",
-    alignItems: "center",
+    marginBottom: 20,
   },
 });
