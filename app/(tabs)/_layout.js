@@ -75,6 +75,22 @@ export default function TabLayout() {
           tabBarActiveTintColor: "#fff",
         }}
       />
+      <Tabs.Screen
+        name="good-actions"
+        options={{
+          title: "Actions",
+          tabBarIcon: () => <Ionicons name="alert" size={24} color="#C36878" />,
+          header: () => (
+            <Header
+              leftComponent={{ text: "Actions", style: { color: "#fff" } }}
+              rightComponent={{ icon: "info", color: "#fff" }}
+              containerStyle={{ backgroundColor: "#C36878" }}
+            />
+          ),
+          tabBarActiveBackgroundColor: "#F6A0AE",
+          tabBarActiveTintColor: "#fff",
+        }}
+      />
     </Tabs>
   );
 }
