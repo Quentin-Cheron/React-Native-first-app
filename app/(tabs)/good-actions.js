@@ -14,16 +14,26 @@ export default function GoodActionScreen() {
   const [goodActionsList, setGoodActionsList] = useState([]);
 
   const handleAddGoodAction = () => {
-    if (goodActionsList.findIndex((item) => item.value === goodAction) === -1) {
-      setGoodActionsList([
-        ...goodActionsList,
+    // Check if the input is empty
+    if (goodAction === "") {
+      alert("Please enter a good action");
+    } else if (
+      // Check if the action already exists
+      goodActionsList.findIndex((item) => item.value === goodAction) === -1
+    ) {
+      // Add the action to the list
+      setGoodActionsList((prevData) => [
+        ...prevData,
         { key: Math.random(), value: goodAction },
       ]);
     } else {
+      // Alert the user that the action already exists
       alert("This action already exists");
     }
     setGoodAction("");
   };
+
+  // Delete a good action
 
   const handleDeleteGoodAction = (e) => {
     setGoodActionsList(goodActionsList.filter((item) => item.value !== e));
