@@ -1,11 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Image } from "expo-image";
-import { Button } from "react-native-elements";
 
 export default function HomeScreen() {
-  const goToDetails = () => {
-    navigation.navigate("information");
-  };
   return (
     <View style={styles.container}>
       <Image
@@ -15,7 +11,6 @@ export default function HomeScreen() {
         }
         contentFit="contain"
       />
-      <Button title="En savoir plus" onPress={goToDetails} />
     </View>
   );
 }

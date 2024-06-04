@@ -18,6 +18,8 @@ export default function GoodActionScreen() {
     setGoodAction("");
   };
 
+  const handleDeleteGoodAction = (e) => {};
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -35,6 +37,9 @@ export default function GoodActionScreen() {
           renderItem={(itemData) => (
             <View style={styles.listItem}>
               <Text>{itemData.item}</Text>
+              <Buttton onPress={(e) => handleDeleteGoodAction(e)}>
+                Supprimer
+              </Buttton>
             </View>
           )}
         />
